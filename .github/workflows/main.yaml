@@ -22,7 +22,7 @@ jobs:
         run: npm install -g surge
 
       - name: Deploy a Surge
-        run: surge ./ mini-tienda-itla12.surge.sh --token ${{ secrets.SURGE_TOKEN }}
+        run: surge ./ --token ${{ secrets.SURGE_TOKEN }}
 
       - name: Enviar notificación a ntfy
         run: |
@@ -30,3 +30,4 @@ jobs:
                -H "Priority: high" \
                -d "La página fue desplegada correctamente en Surge.sh" \
                https://ntfy.sh/devops-itla12
+
