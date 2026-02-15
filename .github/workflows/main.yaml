@@ -1,4 +1,4 @@
-name: Deploy a Surge
+name: Notificacion NTFY
 
 on:
   push:
@@ -6,20 +6,13 @@ on:
       - main
 
 jobs:
-  deploy:
+  notificar:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Clonar repositorio
-        uses: actions/checkout@v3
-
-      - name: Instalar Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-
-      - name: Instalar Surge
-        run: npm install -g surge
-
-      - name: Deploy a Surge
-        run: surge ./ TU_DOMINIO.surge.sh --token ${{ secrets.SURGE_TOKEN }}
+      - name: Enviar notificación a ntfy
+        run: |
+          curl -H "Title: Nuevo Push en main" \
+               -H "Priority: urgent" \
+               -d "Se realizó un nuevo push al repositorio 🚀" \
+               https://ntfy.sh/devops-itla12
